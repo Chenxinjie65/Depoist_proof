@@ -206,6 +206,9 @@ async function main() {
     }
   } catch (error) {
     console.error('Error:', error);
+  } finally {
+    await provider.destroy();
+    process.exit(0);
   }
 }
 
