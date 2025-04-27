@@ -178,10 +178,9 @@ async function withdraw(note) {
   try {
     console.log('准备调用链上合约进行取款...');
     
-    // 先生成 proof
+    // 生成 proof
     const proofData = await generateProof(note);
     
-    // 创建钱包实例
     const privateKey = process.env.PRIVATE_KEY;
     if (!privateKey) {
       throw new Error('请在 .env 文件中设置 PRIVATE_KEY');
@@ -241,7 +240,6 @@ async function main() {
     } catch (error) {
         console.error('Error:', error.message);
     } finally {
-        // 关闭 provider 连接
         await provider.destroy();
         process.exit(0);
     }

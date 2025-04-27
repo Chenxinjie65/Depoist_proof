@@ -17,7 +17,7 @@ const abi = [
     "event Deposit(bytes32 indexed commitment, uint32 leafIndex, uint256 timestamp)"
 ];
 
-const addresstornado = '0x8C4A04d872a6C1BE37964A21ba3a138525dFF50b';
+const addresstornado = process.env.TORNADO_ADDRESS;
 const contract = new ethers.Contract(addresstornado, abi, provider);
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
