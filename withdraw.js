@@ -228,7 +228,6 @@ async function withdraw(note) {
   }
 }
 
-// 修改 main 函数，添加取款功能
 async function main() {
     try {
         const withdrawResult = await withdraw(process.env.NOTE);
