@@ -95,7 +95,6 @@ async function generateMerkleProof(note) {
     };
 }
 
-// 初始化
 async function initialize() {
   const buildGroth16 = require('websnark/src/groth16');
   const websnarkUtils = require('websnark/src/utils');
@@ -123,9 +122,7 @@ async function initialize() {
 
 // 生成zk proof
 async function generateProof(note) {
-    // 初始化必要的组件
     const { groth16, websnarkUtils, circuit, provingKey } = await initialize();
-    
     // 解析 note 并创建存款凭证
     const { nullifier, secret } = parseNote(note);
     const deposit = createDeposit(nullifier, secret);
@@ -173,7 +170,6 @@ async function generateProof(note) {
     };
 }
 
-// 调用链上合约进行取款
 async function withdraw(note) {
   try {
     console.log('准备调用链上合约进行取款...');
@@ -188,12 +184,10 @@ async function withdraw(note) {
     
     const wallet = new ethers.Wallet(privateKey, provider);
 
-    // 解构需要的参数
+    // 解构调用合约需要的参数
     const { proof, args } = proofData;
-    // 直接使用 args 数组中的参数
     const [root, nullifierHash, recipient, relayer, fee, refund] = args;
 
-    // 发送交易
     console.log('发送交易...');
     const tx = await tornado.connect(wallet).withdraw(
       proof,
@@ -208,8 +202,6 @@ async function withdraw(note) {
     
     console.log('交易已发送，等待确认...');
     console.log('交易哈希:', tx.hash);
-    
-    // 等待交易确认
     const receipt = await tx.wait();
     console.log('交易已确认，区块号:', receipt.blockNumber);
     
