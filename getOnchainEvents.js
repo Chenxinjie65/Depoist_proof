@@ -11,8 +11,6 @@ const provider = new ethers.JsonRpcProvider(URL);
   检索链上的depoist事件，提前写入到本地cache文件夹中，方便后续使用
   默认写到cache文件夹下的sepolia文件夹中
 */
-
-
 const abi = [
     "event Deposit(bytes32 indexed commitment, uint32 leafIndex, uint256 timestamp)"
 ];
